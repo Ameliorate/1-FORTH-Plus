@@ -4,6 +4,7 @@
 /build/
 /bin/
 target/
+/.recommenders/
  
 # OS Files #
 .DS_Store

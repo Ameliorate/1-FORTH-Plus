@@ -32,4 +32,14 @@ public class MethodDecoder {
 	{
 		System.out.println("Hello World!");		// Do stuff here.
 	}
+	
+	/**
+	 * Exposes all other native methods to the program.
+	 */
+	@SuppressWarnings("unused")
+	private void exMethod(Interpreter interpreter)
+	{
+		String value = interpreter.stack.getValue();
+		execute(value, interpreter);
+	}
 }

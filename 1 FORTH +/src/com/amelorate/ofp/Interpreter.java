@@ -12,7 +12,7 @@ public class Interpreter
 	{
 		String[] contentSetting = new String[0];
 		contentSetting[0] = "native";
-		words.put("exmethod", new word(contentSetting, "exmethod"));
+		words.put("exmethod", new word(contentSetting, "exMethod"));
 	}
 	
 	public void executeLine(String code)

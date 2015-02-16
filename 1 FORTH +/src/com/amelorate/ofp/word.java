@@ -8,7 +8,7 @@ public class word
 	 * The built in method used to execute the word if the word is built in and can not be made using other words.
 	 */
 	public String nativeExecuteMethod;
-	
+	MethodDecoder methodDecoder = new MethodDecoder();
 	
 	public word(String[] content)
 	{
@@ -30,7 +30,7 @@ public class word
 			}
 		else
 		{
-			MethodDecoder.execute(nativeExecuteMethod, interpreter);
+			methodDecoder.execute(nativeExecuteMethod, interpreter);
 		}
 	}
 }

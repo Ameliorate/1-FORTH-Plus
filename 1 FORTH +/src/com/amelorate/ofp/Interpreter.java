@@ -48,6 +48,11 @@ public class Interpreter
 		words.get(word).Execute(this);
 	}
 	
+	public String removeQuotes(String value)
+	{
+		return value.substring(1, value.length() - 1);
+	}
+	
 	private String[] splitLine(String line)
 	{
 		ArrayList<String> split = new ArrayList<String>();

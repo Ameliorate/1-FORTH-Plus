@@ -40,6 +40,10 @@ public class MethodDecoder {
 	private void exMethod(Interpreter interpreter)
 	{
 		String value = interpreter.stack.getValue();
-		execute(value, interpreter);
+		if (value.startsWith("\""))
+		{
+			value = interpreter.removeQuotes(value);	// The reason that I don't do this above is that removeQuotes doesn't check for quotes.
+			execute(value, interpreter);
+		}
 	}
 }

@@ -5,15 +5,16 @@ import java.util.HashMap;
 
 public class Interpreter 
 {
-	public HashMap<String, word> words;
+	public HashMap<String, word> words = new HashMap<String, word>();
 	public stack stack = new stack();
 	
 	
 	public Interpreter()
 	{
-		String[] contentSetting = new String[0];
+		String[] contentSetting = new String[1];
 		contentSetting[0] = "native";
-		words.put("exmethod", new word(contentSetting, "exMethod"));
+		word newWord = new word(contentSetting, "exMethod");
+		words.put("exmethod", newWord);
 	}
 	
 	public void executeLine(String code)
@@ -23,7 +24,6 @@ public class Interpreter
 		
 		for (int f = 0; f < codeSplit.length; f++);		// I have no idea why I wasn't using for loops sooner.
 		{
-			i++;	// No idea why I can't use f here.
 			Boolean isVar = isVariable(codeSplit[i]);
 			
 			if (isVar == true)
@@ -35,6 +35,8 @@ public class Interpreter
 			{
 				executeWord(codeSplit[i]);
 			}
+			
+			i++;	// No idea why I can't use f here.
 		}
 	}
 	
@@ -50,7 +52,7 @@ public class Interpreter
 	
 	public String removeQuotes(String value)
 	{
-		return value.substring(1, value.length() - 1);
+		return value.substring(1, value.length()-1);
 	}
 	
 	private String[] splitLine(String line)
@@ -63,12 +65,12 @@ public class Interpreter
 		{
 			if (line.charAt(i) == ' ')
 			{
-				split.add(line.substring(spacePoses.get(spacePoses.size() + 1), i + 1));	// Basically, it will split the string based on spaces, then add it to split.
+				split.add(line.substring(spacePoses.get(spacePoses.size() - 1) + 1, i + 1));	// Basically, it will split the string based on spaces, then add it to split.
 				spacePoses.add(i);	// It then records the position of the space and moves on.
 			}
 		}
 		
-		return (String[]) split.toArray();
+		return split.toArray(new String[1]);
 	}
 	
 	private boolean isVariable(String section)

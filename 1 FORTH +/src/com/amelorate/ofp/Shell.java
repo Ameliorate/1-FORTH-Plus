@@ -2,8 +2,9 @@ package com.amelorate.ofp;
 
 public class Shell 
 {
+	private static Interpreter interpreter = new Interpreter();
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		interpreter.executeLine("\"helloWorld\" exmethod");
 	}
 }

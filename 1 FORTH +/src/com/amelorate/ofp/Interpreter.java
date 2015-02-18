@@ -78,11 +78,11 @@ public class Interpreter
 				spacePoses.add(i);	// It then records the position of the space and moves on.
 			}
 			
-			else if (line.charAt(i) == '\"'  || line.charAt(i) == '}')
+			else if (line.charAt(i) == '\"'  || line.charAt(i) == '{')
 				if (stringOrTable == false)
 					stringOrTable = true;		// I do this because I don't know how && works with ||
 			
-			else if (line.charAt(i) == '\"'  || line.charAt(i) == '{')
+			else if (line.charAt(i) == '\"'  || line.charAt(i) == '}')
 				if (stringOrTable == true)
 					stringOrTable = false;
 		}

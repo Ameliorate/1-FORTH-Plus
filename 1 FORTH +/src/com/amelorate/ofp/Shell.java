@@ -5,6 +5,6 @@ public class Shell
 	private static Interpreter interpreter = new Interpreter();
 	
 	public static void main(String[] args) {
-		interpreter.executeLine("\"hello World\" exmethod");
+		interpreter.executeLine("\"helloWorld\" exmethod");
 	}
 }

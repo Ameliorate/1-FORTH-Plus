@@ -12,7 +12,7 @@ public class Shell
 	private static String input;
 	
 	public static void main(String[] args) {
-		//interpreter.executeLine("\"helloWorld\" exmethod");
+		interpreter.executeLine("\"helloWorld\" exmethod");
 		
 		System.out.print("1 FORTH + Shell " + version + "\n>");
 		

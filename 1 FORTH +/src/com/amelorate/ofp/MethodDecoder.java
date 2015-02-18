@@ -45,5 +45,7 @@ public class MethodDecoder {
 			value = interpreter.removeQuotes(value);	// The reason that I don't do this above is that removeQuotes doesn't check for quotes.
 			execute(value, interpreter);
 		}
+		else
+			System.out.println("[Error] Not a string; May be caused by end of stack.");
 	}
 }

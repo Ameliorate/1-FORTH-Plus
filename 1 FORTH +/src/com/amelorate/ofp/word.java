@@ -8,7 +8,6 @@ public class word
 	 * The built in method used to execute the word if the word is built in and can not be made using other words.
 	 */
 	public String nativeExecuteMethod;
-	MethodDecoder methodDecoder = new MethodDecoder();
 	
 	public word(String[] content)
 	{
@@ -24,13 +23,13 @@ public class word
 	public void Execute(Interpreter interpreter)
 	{
 		if (content[0] != "native")
+			interpreter.methodDecoder.execute(nativeExecuteMethod, interpreter);
+		else
+		{
 			for (int i = 0; i < content.length; i++)
 			{
 				interpreter.executeLine(content[i]);
 			}
-		else
-		{
-			methodDecoder.execute(nativeExecuteMethod, interpreter);
 		}
 	}
 }

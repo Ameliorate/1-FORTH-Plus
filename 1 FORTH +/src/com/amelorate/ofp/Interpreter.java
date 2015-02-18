@@ -7,6 +7,7 @@ public class Interpreter
 {
 	public HashMap<String, word> words = new HashMap<String, word>();
 	public stack stack = new stack();
+	public MethodDecoder methodDecoder = new MethodDecoder();
 	
 	
 	public Interpreter()
@@ -24,9 +25,7 @@ public class Interpreter
 		
 		for (int f = 0; f < codeSplit.length; f++);		// I have no idea why I wasn't using for loops sooner.
 		{
-			Boolean isVar = isVariable(codeSplit[i]);
-			
-			if (isVar == true)
+			if (isVariable(codeSplit[i]))
 			{
 				stack.addValue(codeSplit[i]);
 			}
@@ -47,12 +46,19 @@ public class Interpreter
 	 */
 	public void executeWord(String word)
 	{
+		try
+		{
 		words.get(word).Execute(this);
+		}
+		catch (NullPointerException e) 
+		{
+			System.out.println("[Error] Bad word: '" + word + "'");
+		}
 	}
 	
 	public String removeQuotes(String value)
 	{
-		return value.substring(1, value.length()-1);
+		return value.substring(1, value.length()-1);	// for some reason it doesn't work with spaces inbetween the ), the -, and the other ).
 	}
 	
 	private String[] splitLine(String line)
@@ -60,23 +66,43 @@ public class Interpreter
 		ArrayList<String> split = new ArrayList<String>();
 		ArrayList<Integer> spacePoses = new ArrayList<Integer>();
 		spacePoses.add(0);
+		boolean stringOrTable = false;
+		
+		System.out.println(line);
 		
 		for (int i = 0; i < line.length(); i++)
 		{
-			if (line.charAt(i) == ' ')
+			if (line.charAt(i) == ' ' && stringOrTable == false)
 			{
-				split.add(line.substring(spacePoses.get(spacePoses.size() - 1) + 1, i + 1));	// Basically, it will split the string based on spaces, then add it to split.
+				split.add(line.substring(spacePoses.get(spacePoses.size() - 1), i));	// Basically, it will split the string based on spaces, then add it to split.
 				spacePoses.add(i);	// It then records the position of the space and moves on.
 			}
+			
+			else if (line.charAt(i) == '"'  || line.charAt(i) == '}')
+				if (stringOrTable == false)
+					stringOrTable = false;		// I do this because I don't know how && works with ||
+			
+			else if (line.charAt(i) == '"'  || line.charAt(i) == '{')
+				if (stringOrTable == true)
+					stringOrTable = false;
 		}
+		
+		for (int i = 0; i < split.size(); i++)
+			System.out.println(split.get(i));
 		
 		return split.toArray(new String[1]);
 	}
 	
 	private boolean isVariable(String section)
 	{
-		if (section.startsWith("\"") == true || section.startsWith("{") == true || section.startsWith("^") == true)
-			return true;	// Covers everything but numbers.
+		if (section.startsWith("\"") == true)
+			return true;	// String
+		
+		else if (section.startsWith("{") == true)
+			return true; // Table
+		
+		else if (section.startsWith("^") == true)
+			return true; // Word
 		
 		else
 		{

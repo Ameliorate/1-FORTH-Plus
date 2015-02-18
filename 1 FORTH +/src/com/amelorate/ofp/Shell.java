@@ -26,8 +26,11 @@ public class Shell
 			{
 				e.printStackTrace();
 			}
+			if (input == "exit")
+				break;
+			else
+				interpreter.executeLine(input);
 			
-			interpreter.executeLine(input);
 			System.out.print(">");
 			
 			

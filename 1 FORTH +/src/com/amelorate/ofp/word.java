@@ -22,7 +22,7 @@ public class word
 	
 	public void Execute(Interpreter interpreter)
 	{
-		if (content[0] != "native")
+		if (content[0] == "native")
 			interpreter.methodDecoder.execute(nativeExecuteMethod, interpreter);
 		else
 		{

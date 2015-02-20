@@ -61,6 +61,32 @@ public class Interpreter
 		return value.substring(1, value.length()-1);	// for some reason it doesn't work with spaces inbetween the ), the -, and the other ).
 	}
 	
+	public String getVariableType(String variable)
+	{
+		if (variable == null)	// I don't know why this is null. But it fixes an exception.
+			return "notavar";
+		else if (variable.startsWith("\""))
+			return "string";
+		else if (variable.startsWith("{"))
+			return "table";
+		else if (variable.startsWith("^"))
+			return "word";
+		else if (variable == "null")
+			return "null";
+		else
+		{
+			try
+			{
+				Integer.parseInt(variable);
+			}
+			catch (NumberFormatException e)
+			{
+				return "number";
+			}
+			return "notavar";
+		}
+	}
+	
 	private String[] splitLine(String line)
 	{
 		ArrayList<String> split = new ArrayList<String>();
@@ -95,29 +121,11 @@ public class Interpreter
 	
 	private boolean isVariable(String section)
 	{
-		if (section.startsWith("\"") == true)
-			return true;	// String
+		String type = getVariableType(section);
 		
-		else if (section.startsWith("{") == true)
-			return true; // Table
-		
-		else if (section.startsWith("^") == true)
-			return true; // Word
-		
+		if (type == "string" || type == "word" || type == "table" || type == "number" || type == "null")
+			return true;
 		else
-		{
-			boolean isInt = true;
-			try
-			{
-				Integer.parseInt(section);
-			}
-			catch (NumberFormatException e)
-			{
-				isInt = false;
-			}
-			
-			return isInt;	// If the above try catch block threw, then it isn't an int and can be safely assumed to be a word to be executed.
-			// if it didn't, then it is an int.
-		}
+			return false;
 	}
 }

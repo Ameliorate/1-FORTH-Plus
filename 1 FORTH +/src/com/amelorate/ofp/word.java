@@ -20,6 +20,11 @@ public class word
 		this.nativeExecuteMethod = nativeExecuteMethod;
 	}
 	
+	/**
+	 * Executes the word.
+	 * @param interpreter
+	 * The interpreter to use to execute the word.
+	 */
 	public void Execute(Interpreter interpreter)
 	{
 		if (content[0] == "native")

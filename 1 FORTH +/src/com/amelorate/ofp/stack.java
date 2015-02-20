@@ -8,11 +8,22 @@ public class stack {
 	
 	private ArrayList<String> values = new ArrayList<String>();
 	
+	/**
+	 * Adds a value to the stack.
+	 * @param value
+	 * The value you want to add.
+	 * Valid types are number, string, word, table, and null.
+	 */
 	public void addValue(String value)
 	{
 		values.add(value);
 	}
 	
+	/**
+	 * Gets a value from the top of the stack. Also removes it.
+	 * @return
+	 * Returns the value from the stack.
+	 */
 	public String getValue()
 	{
 		if (values.size() == 0)

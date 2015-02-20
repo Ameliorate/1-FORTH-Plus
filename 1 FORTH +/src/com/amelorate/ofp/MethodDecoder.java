@@ -4,6 +4,13 @@ import java.lang.reflect.InvocationTargetException;
 
 public class MethodDecoder {
 	
+	/**
+	 * Executes a built in method.
+	 * @param method
+	 * The method in question.
+	 * @param interpreter
+	 * The interpreter to use.
+	 */
 	public void execute(String method, Interpreter interpreter)
 	{
 		java.lang.reflect.Method method1 = null;
@@ -20,7 +27,10 @@ public class MethodDecoder {
 		}
 		catch (IllegalArgumentException e) {}
 		catch (IllegalAccessException e) {}
-		catch (InvocationTargetException e) {}
+		catch (InvocationTargetException e) 
+		{
+			System.out.println("[Error] InvocationTargetException: This is likely caused by calling a nonexistant method.");
+		}
 		// Reflection made this a lot easier than it would be otherwise. In C# this would be many lines long.
 	}
 	

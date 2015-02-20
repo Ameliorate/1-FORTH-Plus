@@ -9,15 +9,18 @@ public class Interpreter
 	public stack stack = new stack();
 	public MethodDecoder methodDecoder = new MethodDecoder();
 	
-	
 	public Interpreter()
 	{
 		String[] contentSetting = new String[1];
 		contentSetting[0] = "native";
-		word newWord = new word(contentSetting, "exMethod");
-		words.put("exmethod", newWord);
+		words.put("exmethod", new word(contentSetting, "exMethod"));
 	}
 	
+	/**
+	 * Executes the entirety of the string.
+	 * @param code
+	 * The code you want interpreted.
+	 */
 	public void executeLine(String code)
 	{
 		String[] codeSplit = splitLine(code);
@@ -40,7 +43,7 @@ public class Interpreter
 	}
 	
 	/**
-	 * Executes the string as if it were a word.
+	 * Executes the string as if it were a word. This does not do variables.
 	 * @param word
 	 * The word you want to execute.
 	 */
@@ -56,11 +59,26 @@ public class Interpreter
 		}
 	}
 	
+	/**
+	 * Removes the quotes from the begining and end of a string.
+	 * @param value
+	 * The string you want quotes removed from.
+	 * @return
+	 * The string with the quotes removed.
+	 */
 	public String removeQuotes(String value)
 	{
 		return value.substring(1, value.length()-1);	// for some reason it doesn't work with spaces inbetween the ), the -, and the other ).
 	}
 	
+	/**
+	 * Gets the type of a variable.
+	 * @param variable
+	 * The variable you want to check.
+	 * @return
+	 * Returns the type of the variable.
+	 * Can be number, string, word, table, null, and notavar if it isn't a variable.
+	 */
 	public String getVariableType(String variable)
 	{
 		if (variable == null)	// I don't know why this is null. But it fixes an exception.
@@ -104,11 +122,11 @@ public class Interpreter
 				spacePoses.add(i);	// It then records the position of the space and moves on.
 			}
 			
-			else if (line.charAt(i) == '\"'  || line.charAt(i) == '{')
+			if (line.charAt(i) == '\"'  || line.charAt(i) == '{')
 				if (stringOrTable == false)
 					stringOrTable = true;		// I do this because I don't know how && works with ||
 			
-			else if (line.charAt(i) == '\"'  || line.charAt(i) == '}')
+			if (line.charAt(i) == '\"'  || line.charAt(i) == '}')
 				if (stringOrTable == true)
 					stringOrTable = false;
 		}

@@ -6,15 +6,14 @@ import java.io.InputStreamReader;
 
 public class Shell 
 {
-	private static final String version = "0.01"; 
 	private static Interpreter interpreter = new Interpreter();
 	private static BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
 	private static String input;
 	
 	public static void main(String[] args) {
-		// interpreter.executeLine("\"helloWorld\" exmethod");
+		interpreter.executeLine("\"helloWorld\" exmethod");
 		
-		System.out.print("1 FORTH + Shell " + version + "\n>");
+		System.out.print("1 FORTH + Shell \n>");
 		while (true)
 		{
 			try 
@@ -31,8 +30,6 @@ public class Shell
 				interpreter.executeLine(input);
 			
 			System.out.print(">");
-			
-			
 		}
 	}
 }

@@ -23,19 +23,22 @@ public class Interpreter
 	 */
 	public void executeLine(String code)
 	{
-		String[] codeSplit = splitLine(code);
+		ArrayList<String> codeSplit = splitLine(code);
 		int i = 0;
+		String cerrentValue;
 		
-		for (int f = 0; f < codeSplit.length; f++);		// I have no idea why I wasn't using for loops sooner.
+		for (int f = 0; f < codeSplit.size(); f++);		// I have no idea why I wasn't using for loops sooner.
 		{
-			if (isVariable(codeSplit[i]))
+			cerrentValue = codeSplit.get(i);
+			
+			if (isVariable(cerrentValue))
 			{
-				stack.addValue(codeSplit[i]);
+				stack.addValue(cerrentValue);
 			}
 			
 			else
 			{
-				executeWord(codeSplit[i]);
+				executeWord(cerrentValue);
 			}
 			
 			i++;	// No idea why I can't use f here.
@@ -60,7 +63,7 @@ public class Interpreter
 	}
 	
 	/**
-	 * Removes the quotes from the begining and end of a string.
+	 * Removes the quotes from the beginning and end of a string.
 	 * @param value
 	 * The string you want quotes removed from.
 	 * @return
@@ -105,7 +108,7 @@ public class Interpreter
 		}
 	}
 	
-	private String[] splitLine(String line)
+		line = line + " ";
 	{
 		ArrayList<String> split = new ArrayList<String>();
 		ArrayList<Integer> spacePoses = new ArrayList<Integer>();
@@ -134,7 +137,7 @@ public class Interpreter
 		for (int i = 0; i < split.size(); i++)
 			System.out.println(split.get(i));
 		
-		return split.toArray(new String[1]);
+		return split;
 	}
 	
 	private boolean isVariable(String section)

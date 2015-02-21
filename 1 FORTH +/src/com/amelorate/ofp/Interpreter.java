@@ -123,6 +123,7 @@ public class Interpreter
 		ArrayList<Integer> spacePoses = new ArrayList<Integer>();
 		spacePoses.add(0);
 		boolean stringOrTable = false;
+		boolean secondPartOrGreater = false;
 		line = line + " ";
 		
 		debugText(line + " is the raw text to be split.", "splitLine");
@@ -131,8 +132,12 @@ public class Interpreter
 		{
 			if (line.charAt(i) == ' ' && stringOrTable == false)
 			{
-				split.add(line.substring(spacePoses.get(spacePoses.size() - 1), i));	// Basically, it will split the string based on spaces, then add it to split.
+				String addingString = line.substring(spacePoses.get(spacePoses.size() - 1), i);
+				if (secondPartOrGreater == true)
+					addingString = addingString.substring(1, addingString.length());
+				split.add(addingString);
 				spacePoses.add(i);	// It then records the position of the space and moves on.
+				secondPartOrGreater = true;
 			}
 			
 			if (line.charAt(i) == '\"'  || line.charAt(i) == '{')

@@ -52,9 +52,11 @@ public class Interpreter
 	 */
 	public void executeWord(String word)
 	{
+		debugText("Doing word " + word, "executeWord");
+		
 		try
 		{
-		words.get(word).Execute(this);
+			words.get(word).Execute(this);
 		}
 		catch (NullPointerException e) 
 		{
@@ -102,17 +104,17 @@ public class Interpreter
 			}
 			catch (NumberFormatException e)
 			{
-				return "number";
+				return "notavar";
 			}
-			return "notavar";
+			return "number";
 		}
 	}
 	
-	public static void debugText(String text)
+	public static void debugText(String text, String source)
 	{
 		boolean debugMode = true;
 		if (debugMode == true)
-			System.out.println("[Debug] " + text);
+			System.out.println("[Debug] [" + source + "] " + text);
 	}
 	
 	private ArrayList<String> splitLine(String line)
@@ -123,7 +125,7 @@ public class Interpreter
 		boolean stringOrTable = false;
 		line = line + " ";
 		
-		debugText(line + " is the raw text to be split.");
+		debugText(line + " is the raw text to be split.", "splitLine");
 		
 		for (int i = 0; i < line.length(); i++)
 		{
@@ -143,7 +145,7 @@ public class Interpreter
 		}
 		
 		for (int i = 0; i < split.size(); i++)
-			debugText(split.get(i) + " final split output.");
+			debugText(split.get(i) + " final split output.", "splitLine");
 		
 		return split;
 	}
@@ -151,6 +153,8 @@ public class Interpreter
 	private boolean isVariable(String section)
 	{
 		String type = getVariableType(section);
+		
+		debugText(type + " Is the type of " + section, "isVariable");
 		
 		if (type == "string" || type == "word" || type == "table" || type == "number" || type == "null")
 			return true;

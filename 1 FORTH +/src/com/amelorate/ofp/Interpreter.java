@@ -108,14 +108,22 @@ public class Interpreter
 		}
 	}
 	
-		line = line + " ";
+	public static void debugText(String text)
+	{
+		boolean debugMode = true;
+		if (debugMode == true)
+			System.out.println("[Debug] " + text);
+	}
+	
+	private ArrayList<String> splitLine(String line)
 	{
 		ArrayList<String> split = new ArrayList<String>();
 		ArrayList<Integer> spacePoses = new ArrayList<Integer>();
 		spacePoses.add(0);
 		boolean stringOrTable = false;
+		line = line + " ";
 		
-		System.out.println(line);
+		debugText(line + " is the raw text to be split.");
 		
 		for (int i = 0; i < line.length(); i++)
 		{
@@ -135,7 +143,7 @@ public class Interpreter
 		}
 		
 		for (int i = 0; i < split.size(); i++)
-			System.out.println(split.get(i));
+			debugText(split.get(i) + " final split output.");
 		
 		return split;
 	}

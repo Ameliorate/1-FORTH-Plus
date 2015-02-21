@@ -17,6 +17,7 @@ public class stack {
 	public void addValue(String value)
 	{
 		values.add(value);
+		Interpreter.debugText(value + " to stack");
 	}
 	
 	/**

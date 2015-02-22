@@ -58,4 +58,13 @@ public class MethodDecoder {
 		else
 			System.out.println("[Error] Not a string; May be caused by end of stack.");
 	}
+	
+	/**
+	 * Takes 2 strings and makes a word out of them. The first string is the name of the word and the second is the content of it.
+	 */
+	@SuppressWarnings("unused")
+	private void mkWord(Interpreter interpreter)
+	{
+		
+	}
 }

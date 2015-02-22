@@ -1,17 +1,16 @@
 package com.amelorate.ofp;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Interpreter 
 {
-	public HashMap<String, word> words = new HashMap<String, word>();
+	public WordMap words = new WordMap(this);
 	public stack stack = new stack();
 	public MethodDecoder methodDecoder = new MethodDecoder();
 	
 	public Interpreter()
 	{
-		words.put("exmethod", new word("native", "exMethod"));
+		words.addNative("exmethod", "exMethod");
 	}
 	
 	/**
@@ -36,29 +35,10 @@ public class Interpreter
 			
 			else
 			{
-				executeWord(cerrentValue);
+				words.doWord(cerrentValue);
 			}
 			
 			i++;	// No idea why I can't use f here.
-		}
-	}
-	
-	/**
-	 * Executes the string as if it were a word. This does not do variables.
-	 * @param word
-	 * The word you want to execute.
-	 */
-	public void executeWord(String word)
-	{
-		debugText("Doing word " + word, "executeWord");
-		
-		try
-		{
-			words.get(word).Execute(this);
-		}
-		catch (NullPointerException e) 
-		{
-			System.out.println("[Error] Bad word: '" + word + "'");
 		}
 	}
 	

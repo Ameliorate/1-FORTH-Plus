@@ -11,9 +11,7 @@ public class Interpreter
 	
 	public Interpreter()
 	{
-		String[] contentSetting = new String[1];
-		contentSetting[0] = "native";
-		words.put("exmethod", new word(contentSetting, "exMethod"));
+		words.put("exmethod", new word("native", "exMethod"));
 	}
 	
 	/**

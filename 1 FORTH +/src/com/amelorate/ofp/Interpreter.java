@@ -7,6 +7,7 @@ public class Interpreter
 	public WordMap words = new WordMap(this);
 	public stack stack = new stack();
 	public MethodDecoder methodDecoder = new MethodDecoder();
+	public String errorAction = "warn";
 	
 	public Interpreter()
 	{
@@ -17,8 +18,9 @@ public class Interpreter
 	 * Executes the entirety of the string.
 	 * @param code
 	 * The code you want interpreted.
+	 * @throws Exception 
 	 */
-	public void executeLine(String code)
+	public void executeLine(String code) throws Exception
 	{
 		ArrayList<String> codeSplit = splitLine(code);
 		int i = 0;
@@ -86,6 +88,14 @@ public class Interpreter
 			}
 			return "number";
 		}
+	}
+	
+	public void error(Exception exeption) throws Exception
+	{
+		if (errorAction == "exeption")
+			throw exeption;
+		else if (errorAction == "error")
+			System.out.println("[Error] " + exeption.toString());
 	}
 	
 	public static void debugText(String text, String source)

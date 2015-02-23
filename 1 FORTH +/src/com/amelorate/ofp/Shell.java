@@ -11,7 +11,16 @@ public class Shell
 	private static String input;
 	
 	public static void main(String[] args) {
-		interpreter.executeLine("\"helloWorld\" exmethod");
+		try
+		{
+			interpreter.executeLine("\"helloWorld\" exmethod");
+		}
+		catch (Exception e)
+		{
+			System.out.println("Interprter crashed with: " + e.toString());
+			System.out.println("Reseting interpreter...");
+			interpreter = new Interpreter();
+		}
 		
 		System.out.print("1 FORTH + Shell \n>");
 		while (true)
@@ -27,7 +36,18 @@ public class Shell
 			if (input == "exit")
 				break;
 			else
-				interpreter.executeLine(input);
+			{
+				try
+				{
+					interpreter.executeLine(input);
+				}
+				catch (Exception e)
+				{
+					System.out.println("Interprter crashed with: " + e.toString());
+					System.out.println("Reseting interpreter...");
+					interpreter = new Interpreter();
+				}
+			}
 			
 			System.out.print(">");
 		}

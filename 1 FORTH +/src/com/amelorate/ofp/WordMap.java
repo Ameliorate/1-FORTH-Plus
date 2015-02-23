@@ -34,13 +34,13 @@ public class WordMap
 		words.remove(name);
 	}
 	
-	public void doWord(String name)
+	public void doWord(String name) throws Exception
 	{
 		Interpreter.debugText("Doing " + name, "doWord");
 		
 		word doingWord = words.get(name);
 		if (doingWord == null)
-			System.out.println("[Error] '" + name + "' is not a valid word.");
+			interpreter.error(new IllegalArgumentException("'" + name + "' is not a valid word."));
 		else
 			doingWord.Execute(interpreter);
 		

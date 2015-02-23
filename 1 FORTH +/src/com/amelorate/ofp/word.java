@@ -24,8 +24,9 @@ public class word
 	 * Executes the word.
 	 * @param interpreter
 	 * The interpreter to use to execute the word.
+	 * @throws Exception 
 	 */
-	public void Execute(Interpreter interpreter)
+	public void Execute(Interpreter interpreter) throws Exception
 	{
 		if (content == "native")
 			interpreter.methodDecoder.execute(nativeExecuteMethod, interpreter);

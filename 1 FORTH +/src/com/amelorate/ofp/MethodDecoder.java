@@ -10,8 +10,9 @@ public class MethodDecoder {
 	 * The method in question.
 	 * @param interpreter
 	 * The interpreter to use.
+	 * @throws Exception 
 	 */
-	public void execute(String method, Interpreter interpreter)
+	public void execute(String method, Interpreter interpreter) throws Exception
 	{
 		java.lang.reflect.Method method1 = null;
 		try 
@@ -29,9 +30,10 @@ public class MethodDecoder {
 		catch (IllegalAccessException e) {}
 		catch (InvocationTargetException e) 
 		{
-			System.out.println("[Error] InvocationTargetException: This is likely caused by calling a nonexistant method.");
+			interpreter.error(new Exception("InvocationTargetException: This is likely caused by calling a nonexistant method."));
 		}
 		// Reflection made this a lot easier than it would be otherwise. In C# this would be many lines long.
+		// 
 	}
 	
 	// Perhaps I should do this in a different file?
@@ -45,9 +47,10 @@ public class MethodDecoder {
 	
 	/**
 	 * Exposes all other native methods to the program.
+	 * @throws Exception 
 	 */
 	@SuppressWarnings("unused")
-	private void exMethod(Interpreter interpreter)
+	private void exMethod(Interpreter interpreter) throws Exception
 	{
 		String value = interpreter.stack.getValue();
 		if (value.startsWith("\""))
@@ -56,7 +59,7 @@ public class MethodDecoder {
 			execute(value, interpreter);
 		}
 		else
-			System.out.println("[Error] Not a string; May be caused by end of stack.");
+			interpreter.error(new IllegalArgumentException("Not a string; May be caused by end of stack."));
 	}
 	
 	/**
